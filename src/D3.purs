@@ -1,23 +1,20 @@
 module App.D3 where
 
-import Prelude ((+), (-), const, show)
+import Prelude ((+), (-), const, show, bind, return)
+import Signal.Channel (CHANNEL, Channel)
 import Data.Tuple
 import Pux.Html (Html, div, h1, svg, text, circle, g)
 import Pux.Html.Events (onClick)
-import Pux.Html.Attributes (classID, r, style)
-import Graphics.D3.Base
+import Pux.Html.Attributes (id_, r, style)
 
-data Action = Render
+import App.D3.Actions
+import App.D3.State
+import App.D3.Render (init)
 
-type State = Int  -- this should be the handle to the D3 SVG or something
-
-init :: State
-init = 211 -- initialize the D3 SVG
-
-update :: Action -> State -> State
+update :: D3Action -> State -> State
 update Render state = state -- layout the data
 
-view :: State -> Html Action
+view :: State -> Html D3Action
 view state =
   div
     []
